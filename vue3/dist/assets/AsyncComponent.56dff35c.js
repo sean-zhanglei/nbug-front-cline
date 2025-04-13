@@ -1,0 +1,2 @@
+import{d as t,_ as s,o as a,c,a as o,t as u}from"./main.72f20229.js";const p=t({name:"AsyncComponent",props:{count:{type:Number,required:!0}}});const r={class:"async-content"};function _(e,n,d,l,i,m){return a(),c("div",r,[n[0]||(n[0]=o("h3",null,"\u5F02\u6B65\u7EC4\u4EF6",-1)),o("p",null,"\u8BA1\u6570\u5668\u5E73\u65B9: "+u(e.count*e.count),1)])}const f=s(p,[["render",_],["__scopeId","data-v-ac629ba0"]]);export{f as default};
+//# sourceMappingURL=AsyncComponent.56dff35c.js.map

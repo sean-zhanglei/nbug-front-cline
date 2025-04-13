@@ -1,0 +1,37 @@
+# vue2-ref-ts-demo
+
+> 适配Node.js 11.x环境的Vue 2项目
+
+## 系统要求
+- Node.js 11.x
+- npm 6.x
+
+## 主要功能
+- Vue 2.6/7 + 是 Vue 2 最新的次级版本。其提供了内置的组合式 API 支持。
+> 参考：https://v2.cn.vuejs.org/v2/guide/migration-vue-2-7.html
+- Options API 使用示例
+- 数据绑定 (`data`)
+- 方法定义 (`methods`)
+- 事件处理 (`@click`)
+- 样式作用域 (`scoped`)
+
+## 测试说明
+测试用例覆盖以下功能：
+1. 初始消息渲染
+2. 消息反转功能
+3. 计数增加功能
+
+## 运行测试
+```bash
+npm install
+npm test
+
+npm run dev
+npm run build
+```
+
+## 核心知识点总结
+1. **Options API**: Vue 2 的主要编程方式
+2. **响应式数据**: data 返回的对象会被 Vue 转为响应式
+3. **方法绑定**: methods 中定义的方法可以绑定到模板事件
+4. **组件作用域**: scoped 样式仅作用于当前组件
