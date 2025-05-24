@@ -1,0 +1,32 @@
+{
+  "name": "react-antdesign",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "cross-env UMI_ENV=dev umi dev",
+    "build": "UMI_ENV=pro umi build",
+    "postinstall": "umi setup",
+    "start": "cross-env PORT=8888 COMPRESS=build UMI_ENV=pro umi dev",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.6.1",
+    "@umijs/max": "^4.0.0",
+    "antd": "^5.25.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "styled-components": "^6.1.18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@umijs/types": "^3.5.43",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.30.1"
+  }
+}
