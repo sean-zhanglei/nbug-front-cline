@@ -37,25 +37,24 @@ const fetchFormData = async (params: {id: string, type: string}): Promise<FormDa
 
 const styles: Record<string, React.CSSProperties> = {
   container: {
-    padding: '10px',
-    height: 'calc(100vh - 100px)'
+    padding: '10px'
   },
   formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     background: '#fff',
     padding: '10px',
-    overflow: 'auto',
     borderRadius: '8px',
     boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
     height: '100%'
   },
   imageContainer: {
-    background: '#235eb6',
     padding: '20px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '8px',
-    height: '100%'
+    borderRadius: '8px'
   },
   closeButton: {
     alignSelf: 'flex-end'
@@ -108,9 +107,9 @@ const CustomContent3: React.FC<CustomContentProps> = ({ onClose, params }) => {
   return (
     <Spin spinning={loading} tip="数据加载中..." size="large">
       <div style={styles.container}>
-        <Row gutter={[16, 16]} style={{ height: '100%' }}>
+        <Row gutter={[8, 8]}>
           {/* 左侧表单 */}
-          <Col xs={24} md={8} style={{ height: '100%' }}>
+          <Col xs={24} md={8}>
             <div style={styles.formContainer}>
               <Form {...formItemLayout} layout="vertical" initialValues={formData}>
                 {formData.leftFields.map((field) => (
@@ -122,8 +121,8 @@ const CustomContent3: React.FC<CustomContentProps> = ({ onClose, params }) => {
             </div>
           </Col>
 
-          <Col xs={24} md={16} style={{ height: '100%' }}>
-            <Row gutter={[16, 16]} style={{ height: '100%' }}>
+          <Col xs={24} md={16}>
+            <Row gutter={[8, 8]}>
               {/* 图片区域 */}
               <Col span={24}>
                 <div style={styles.imageContainer}>

@@ -1,17 +1,97 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Button, Form, Input, Image, Spin } from 'antd';
+import { Button, Form, Input, Image, Spin } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
+import styled from 'styled-components';
 
-const { Content } = Layout;
+// 创建响应式组件
+const Container = styled.div`
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+  }
+`;
+
+const LeftForm = styled.div`
+  width: 30%;
+  background: #fff;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-right: 10px;
+  overflow: auto;
+
+  @media (max-width: 992px) {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+`;
+
+const RightContent = styled.div`
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 992px) {
+    width: 100%;
+  }
+`;
+
+const ImageContainer = styled.div`
+  background: #235eb6;
+  padding: 20px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  height: 200px;
+`;
+
+const BottomForms = styled.div`
+  display: flex;
+  flex: 1;
+  gap: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const FormSection = styled.div`
+  flex: 1;
+  background: #fff;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+  }
+`;
+
+const styles: Record<string, React.CSSProperties> = {
+  closeButton: {
+    alignSelf: 'flex-end',
+    marginBottom: '16px'
+  }
+};
 
 interface FormData {
-  leftFields: {id: number}[];
-  bottomLeftFields: {id: number}[];
-  bottomCenterFields: {id: number}[];
-  bottomRightFields: {id: number}[];
+  leftFields: {id: number, value: string}[];
+  bottomLeftFields: {id: number, value: string}[];
+  bottomCenterFields: {id: number, value: string}[];
+  bottomRightFields: {id: number, value: string}[];
 }
 
-// 模拟异步获取表单数据
 const fetchFormData = async (params: {id: string, type: string}): Promise<FormData> => {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -38,48 +118,6 @@ const fetchFormData = async (params: {id: string, type: string}): Promise<FormDa
   });
 };
 
-const styles: Record<string, React.CSSProperties> = {
-  rootLayout: {
-    flexDirection: 'row',
-    gap: '10px'
-  },
-  leftContent: {
-    padding: '4px',
-    background: '#fff',
-    width: '30%',
-    flex: '1 1 auto',
-    overflow: 'auto'
-  },
-  rightLayout: {
-    width: '70%',
-    gap: '10px'
-  },
-  imageContent: {
-    padding: '0 4px'
-  },
-  bottomLayout: {
-    flexDirection: 'row',
-    gap: '10px'
-  },
-  formContent: {
-    padding: '4px',
-    background: '#fff',
-    flex: '1 1 auto',
-    overflow: 'auto'
-  },
-  rightBottomContent: {
-    height: '100%',
-    padding: '4px',
-    background: '#fff',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between'
-  },
-  closeButton: {
-    alignSelf: 'flex-end'
-  }
-};
-
 interface CustomContentProps {
   onClose: () => void;
   params: {
@@ -88,13 +126,13 @@ interface CustomContentProps {
   };
 }
 
-const CustomContent: React.FC<CustomContentProps> = ({ onClose, params }) => {
+const CustomContent5: React.FC<CustomContentProps> = ({ onClose, params }) => {
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState<FormData>({
-    leftFields: Array(8).fill(null).map((_, i) => ({ id: i+1 })),
-    bottomLeftFields: Array(7).fill(null).map((_, i) => ({ id: i+1 })),
-    bottomCenterFields: Array(10).fill(null).map((_, i) => ({ id: i+1 })),
-    bottomRightFields: Array(5).fill(null).map((_, i) => ({ id: i+1 }))
+    leftFields: Array(8).fill(null).map((_, i) => ({ id: i+1, value: '' })),
+    bottomLeftFields: Array(7).fill(null).map((_, i) => ({ id: i+1, value: '' })),
+    bottomCenterFields: Array(10).fill(null).map((_, i) => ({ id: i+1, value: '' })),
+    bottomRightFields: Array(5).fill(null).map((_, i) => ({ id: i+1, value: '' }))
   });
 
   useEffect(() => {
@@ -125,9 +163,9 @@ const CustomContent: React.FC<CustomContentProps> = ({ onClose, params }) => {
 
   return (
     <Spin spinning={loading} tip="数据加载中..." size="large">
-      <Layout style={styles.rootLayout}>
-        {/* 左侧Form */}
-        <Content style={styles.leftContent}>
+      <Container>
+        {/* 左侧表单 */}
+        <LeftForm>
           <Form {...formItemLayout} layout="vertical" initialValues={formData}>
             {formData.leftFields.map((field) => (
               <Form.Item key={`left-${field.id}`} label={`字段${field.id}`}>
@@ -135,20 +173,21 @@ const CustomContent: React.FC<CustomContentProps> = ({ onClose, params }) => {
               </Form.Item>
             ))}
           </Form>
-        </Content>
+        </LeftForm>
 
-        <Layout style={styles.rightLayout}>
-          <Content style={styles.imageContent}>
+        <RightContent>
+          {/* 图片区域 */}
+          <ImageContainer>
             <Image 
               src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" 
               alt="Ant Design"
               height={200}
             />
-          </Content>
+          </ImageContainer>
 
-          <Layout style={styles.bottomLayout}>
-            {/* 右下左Form */}
-            <Content style={styles.formContent}>
+          {/* 底部表单区域 */}
+          <BottomForms>
+            <FormSection>
               <Form {...formItemLayout} layout="vertical" initialValues={formData}>
                 {formData.bottomLeftFields.map((field) => (
                   <Form.Item key={`bottom-left-${field.id}`} label={`字段${field.id}`}>
@@ -156,10 +195,9 @@ const CustomContent: React.FC<CustomContentProps> = ({ onClose, params }) => {
                   </Form.Item>
                 ))}
               </Form>
-            </Content>
+            </FormSection>
 
-            {/* 右下中Form */}
-            <Content style={styles.formContent}>
+            <FormSection>
               <Form {...formItemLayout} layout="vertical" initialValues={formData}>
                 {formData.bottomCenterFields.map((field) => (
                   <Form.Item key={`bottom-center-${field.id}`} label={`字段${field.id}`}>
@@ -167,10 +205,9 @@ const CustomContent: React.FC<CustomContentProps> = ({ onClose, params }) => {
                   </Form.Item>
                 ))}
               </Form>
-            </Content>
+            </FormSection>
 
-            {/* 右下右 */}
-            <Content style={styles.rightBottomContent}>
+            <FormSection>
               <Form {...formItemLayout} layout="vertical" initialValues={formData}>
                 {formData.bottomRightFields.map((field) => (
                   <Form.Item key={`bottom-right-${field.id}`} label={`字段${field.id}`}>
@@ -186,12 +223,12 @@ const CustomContent: React.FC<CustomContentProps> = ({ onClose, params }) => {
               >
                 关闭
               </Button>
-            </Content>
-          </Layout>
-        </Layout>
-      </Layout>
+            </FormSection>
+          </BottomForms>
+        </RightContent>
+      </Container>
     </Spin>
   );
 };
 
-export default CustomContent;
+export default CustomContent5;

@@ -45,7 +45,6 @@ const styles: Record<string, React.CSSProperties> = {
     gridTemplateColumns: '30% 70%',
     gridTemplateRows: 'minmax(200px, auto) 1fr',
     gap: '10px',
-    height: 'calc(100vh - 100px)',
     padding: '10px'
   },
   leftForm: {
@@ -58,7 +57,6 @@ const styles: Record<string, React.CSSProperties> = {
   },
   image: {
     gridArea: 'image',
-    background: '#235eb6',
     padding: '0 4px',
     display: 'flex',
     justifyContent: 'center',
@@ -68,8 +66,7 @@ const styles: Record<string, React.CSSProperties> = {
     gridArea: 'bottom',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
-    gap: '10px',
-    height: '100%'
+    gap: '10px'
   },
   formContainer: {
     background: '#fff',

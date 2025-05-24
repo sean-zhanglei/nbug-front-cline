@@ -4,12 +4,14 @@ import CustomContent from './components/Content';
 import CustomContent2 from './components/Content2';
 import CustomContent3 from './components/Content3';
 import CustomContent4 from './components/Content4';
+import CustomContent5 from './components/Content5';
 
 const drawerConfigs = [
   { Component: CustomContent, buttonText: 'Ant Design 按钮 Antd Layout' },
   { Component: CustomContent2, buttonText: 'Ant Design 按钮2 Grid' },
   { Component: CustomContent3, buttonText: 'Ant Design 按钮3 Antd Grid' },
-  { Component: CustomContent4, buttonText: 'Ant Design 按钮4 Antd Flex' }
+  { Component: CustomContent4, buttonText: 'Ant Design 按钮4 Antd Flex' },
+  { Component: CustomContent5, buttonText: 'Ant Design 按钮5 百分比媒体查询' }
 ];
 
 const Home: React.FC = () => {
