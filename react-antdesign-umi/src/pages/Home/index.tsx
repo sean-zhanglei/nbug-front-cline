@@ -6,13 +6,15 @@ import CustomContent2 from '@/pages/Home/components/Content2';
 import CustomContent3 from '@/pages/Home/components/Content3';
 import CustomContent4 from '@/pages/Home/components/Content4';
 import CustomContent5 from '@/pages/Home/components/Content5';
+import CustomContent6 from '@/pages/Home/components/Content6';
 
 const drawerConfigs = [
   { Component: CustomContent, buttonKey: 'button1' },
   { Component: CustomContent2, buttonKey: 'button2' },
   { Component: CustomContent3, buttonKey: 'button3' },
   { Component: CustomContent4, buttonKey: 'button4' },
-  { Component: CustomContent5, buttonKey: 'button5' }
+  { Component: CustomContent5, buttonKey: 'button5' },
+  { Component: CustomContent6, buttonKey: 'button6' }
 ];
 
 const Home: React.FC = () => {
